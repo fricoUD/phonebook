@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -81,7 +82,20 @@ if (post != null) txt = post;
 <div class="table">
 
 <table>
-<%=request.getAttribute("table")%>
+	<th>Name</th>
+	<th>Surname</th>
+	<th>Number</th>
+	<th>Sex</th>
+	
+<c:forEach items="${table.getTable()}" var="current">
+        <tr>
+          <td><c:out value="${current.name}" /></td>
+          <td><c:out value="${current.surname}" /></td>
+          <td><c:out value="${current.number}" /></td>
+          <td><c:out value="${current.sex}" /></td>
+        </tr>
+      </c:forEach>
+
 <br>
 
 </table>
