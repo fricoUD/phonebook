@@ -70,7 +70,7 @@ h1 {
   		
   		<label for="sex">Sex:</label>
   <select name="sex" id="sex" onchange="if (this.value=='other'){this.form['other'].style.visibility='visible'}else {this.form['other'].style.visibility='hidden'};">
-  <option>SELECT</option>
+  <option value="">SELECT</option>
     <option value="male">Male</option>
     <option value="female">Female</option>
     <option value="other">Other</option>    

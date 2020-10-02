@@ -1,28 +1,33 @@
 package com.poniies;
+
 import java.io.*;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.lang3.StringUtils;
 
 
 
 
-public class TableCreation {
+public class ContactDAO{
 	
 	private List<BeanEntry> table = new ArrayList<BeanEntry>();
 	private String[] HEADERS = {"Name","Surname","Number","Sex"};
 	
 
-	public TableCreation(String file) throws IOException {
+	public ContactDAO(String file) throws IOException {
 		readCsv(file);
 	}
 
 	
-	private void readCsv(String file) throws IOException {
-		
+	private void readCsv(String file) throws IOException {		
 		Reader in = new FileReader(file);
 		Iterable<CSVRecord> records = CSVFormat.DEFAULT
 			.withHeader(HEADERS)
@@ -34,10 +39,17 @@ public class TableCreation {
 			String number = record.get("Number");
 			String sex = record.get("Sex");
 			
+			
 			BeanEntry line = new BeanEntry(name, surname, number, sex);
 			this.table.add(line);
 		}
 	}
+	
+	 public void removeEntry (HttpServletRequest request) { 
+		 this.table=this.table.stream()
+				 .filter(b-> StringUtils.equals(null, request.getParameter(b.uuid.toString())))
+				 .collect(Collectors.toList());
+	 }
 	
 	public void addToTable (BeanEntry new_line) {
 		this.table.add(new_line);

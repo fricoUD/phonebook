@@ -1,5 +1,7 @@
 package com.poniies;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class BeanEntry {
@@ -8,6 +10,8 @@ public class BeanEntry {
 	private String surname;
 	private String number;
 	private String sex;
+	public UUID uuid = UUID.randomUUID();
+
 	
 	
 	public BeanEntry(String name, String surname, String number, String sex) {
@@ -16,8 +20,17 @@ public class BeanEntry {
 		this.surname = surname;
 		this.number = number;
 		this.sex = sex;
+		this.uuid = UUID.randomUUID();
 	}
 	
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
 	public BeanEntry(HttpServletRequest request) {
 		this.name = request.getParameter("fname");
 		this.surname = request.getParameter("lname");
